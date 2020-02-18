@@ -10,6 +10,7 @@ public class App {
 
 		while (true) {
 			do {
+				System.out.println("====== SS은행 ======");
 				System.out.println("1. 계좌 발급/폐기");
 				System.out.println("2. 입금");
 				System.out.println("3. 출금");
@@ -26,14 +27,19 @@ public class App {
 
 			switch (ch) {
 			case 1://계좌 발급/폐기
+				bs.bankManage();
 				break;
 			case 2://입금
+				bs.bankIO();
 				break;
 			case 3://출금
+				bs.bankIO();
 				break;
 			case 4://동전 교환
+				bs.exchangeCoin();
 				break;
 			case 5://환전
+				bs.exchangeCurrency();
 				break;
 			}
 		}

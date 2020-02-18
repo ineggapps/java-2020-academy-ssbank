@@ -31,4 +31,12 @@ public class User {
 		return count;
 	}
 
+	public int append(UserVO vo) {
+		if (count >= list.length) {
+			// 배열이 다 차면 크기를 10 더 늘린다.
+			allocation(list.length + 10);
+		}
+		list[count++] = vo;
+		return count;
+	}
 }
