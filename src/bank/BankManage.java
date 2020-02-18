@@ -14,8 +14,6 @@ public class BankManage {
 		this.scard = scard;
 	}
 
-	private int cnt;
-
 	// 발급 메서드
 	public void issued() {
 		System.out.println("계좌 발급 정보를 등록해주세요...");
@@ -29,11 +27,10 @@ public class BankManage {
 			System.out.print("주민번호?");
 			// vo.setPersonNum(sc.next());
 			personNum = sc.next();
-
-			if (personNum.length() < 15) {
-				personNum.replaceAll("\\-", "");
-			} else {
-				System.out.println("주민번호는 15자리 입니다. 다시 입력해주세요.");
+			personNum = personNum.replaceAll("-", "");
+//			System.out.println(personNum+"\n"+personNum.length());
+			if (personNum.length() > 13) {
+				System.out.println("주민번호가 올바르게 입력되지 않았습니다. 다시 입력해주세요.");
 			}
 		} while (personNum == null || personNum.length() > 15);
 		vo.setPersonNum(personNum);
@@ -52,18 +49,15 @@ public class BankManage {
 		System.out.print("계좌번호:");
 		bvo.setBbNum(vo.getAccount());
 		bvo.setBalance(5000);
-		
+
 		System.out.println(bvo.getBbNum());
 
 //		 발급된 otp출력
 		System.out.println("otp:");
-
 		vo.setOtp(scard.makeOTP());
-
 		// 발급된 계좌수만큼 count
 		vo.setBankBook(bvo);
 		user.append(vo);
-		cnt++;
 
 	}
 
@@ -81,7 +75,7 @@ public class BankManage {
 
 		System.out.println("비밀번호 입력:");
 		String password = sc.next();
-
+		
 		// 위의 정보가 list가 가지고 있는 정보하고 같은지 확인
 		for (int i = 0; i < cnt; i++) {
 			if (account.equals(list[i].getAccount()) && password.equals(list[i].getPassword())) {
@@ -91,8 +85,8 @@ public class BankManage {
 				System.out.println("계좌번호:" + list[i].getAccount());
 				System.out.println("비밀번호:" + list[i].getPassword());
 //				System.out.println(list[i].getBankBook());
-				System.out.println("잔액:"+list[i].getBankBook().getBalance());
-				System.out.println("OTP:"+Arrays.toString(list[i].getOtp()));
+				System.out.println("잔액:" + list[i].getBankBook().getBalance());
+				System.out.println("OTP:" + Arrays.toString(list[i].getOtp()));
 				System.out.println("================================");
 				// 계좌조회 시, 잔액도 조회가 되어야 합니다.
 

@@ -11,7 +11,7 @@ public class App {
 		while (true) {
 			do {
 				System.out.println("\n====== SS은행 ======");
-				System.out.println("1. 계좌 발급/폐기");
+				System.out.println("1. 계좌 발급/조회");
 				System.out.println("2. 입출금");
 				System.out.println("3. 동전 교환");
 				System.out.println("4. 환전");

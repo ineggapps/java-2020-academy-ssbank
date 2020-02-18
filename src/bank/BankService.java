@@ -9,7 +9,7 @@ public class BankService {
 	private User user = new User();
 	// 생성자를 통한 의존관계 생성해야 함
 	// 5. SCard (보안카드)
-	SCard scard = new SCard(user);
+	SCard scard = new SCard();
 	// 1. BankManage (발급 조회)
 	BankManage bankManage = new BankManage(user, scard);
 	// 2. BankIO (입출금)
@@ -17,7 +17,7 @@ public class BankService {
 	// 3. BankEx (환전)
 	BankEx bankEx = new BankEx();
 	// 4. CoinEx (동전교환)
-	CoinEx coinEx = new CoinEx(user);
+	CoinEx coinEx = new CoinEx();
 
 	// 계좌 발급 및 조회
 	public void bankManage() {
@@ -36,11 +36,11 @@ public class BankService {
 			switch (ch) {
 			case 1:
 				bankManage.issued();
-				System.out.println("발급되었습니다.");
+				System.out.println("계좌 개설 기념으로 5,000원이 입금되었습니다.");
 				break;
 			case 2:
 				bankManage.lookup();
-				System.out.println("조회 완료. 거래 초기 화면으로 돌아갑니다.");
+				System.out.println("거래 초기 화면으로 돌아갑니다.");
 				break;
 			}
 		} while (ch < 1 || ch > 2);

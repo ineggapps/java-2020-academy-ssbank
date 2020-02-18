@@ -85,7 +85,6 @@ public class BankIO {
 			System.out.println("비밀번호가 틀렸습니다.");
 			return;
 		}
-		System.out.println("출금되었습니다.");
 		draw(output, vo.getAccount());
 		print(user.getList(ac).getBankBook());
 	}
@@ -94,6 +93,12 @@ public class BankIO {
 		UserVO vo = user.getList(ac);
 		BankBookVO bb = vo.getBankBook();
 		long balance = bb.getBalance();
-		bb.setBalance(balance - deposit);
+		long after = balance-deposit;
+		if(after>=0) {
+			bb.setBalance(after);
+			System.out.println("출금되었습니다. ");
+		}else {
+			System.out.println("잔액이 부족하여 출금하실 수 없습니다.");
+		}
 	}
 }

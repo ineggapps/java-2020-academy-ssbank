@@ -1,13 +1,9 @@
 package bank;
 
 public class CoinEx {
-	private User user;
 	public static final int[] UNIT = new int[] { 500, 100, 50, 10 };
 	public static final int[] BILL_UNIT = new int[] { 50000, 10000, 5000, 1000 };
 
-	public CoinEx(User user) {
-		this.user = user;
-	}
 
 	// 동전 => 화폐 교환 메서드
 	// 동전 INT배열 입력하면 화폐 INT배열이 출력됨
