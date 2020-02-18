@@ -96,16 +96,25 @@ public class BankService {
 	// 화폐를동전으로 교환하기
 	public void exchangeCoin() {
 		int ch;
+		int unit[] = CoinEx.UNIT;
+		int coin[] = new int[4];// 500원 100원 50원 10원
 		do {
-			System.out.println("1. 현재 금액 입력");
+			System.out.println("1. 동전 금액 입력");
 			System.out.println("2. 이전 화면으로");
+			System.out.print(" > ");
 			ch = sc.nextInt();
-			
-			if(ch==1) {
-				//메서드 호출
-			}else {
-				break;				
+
+			if (ch == 1) {
+				// 현재 금액 입력
+				for (int i = 0; i < unit.length; i++) {
+					System.out.printf("%d원 동전 몇 개 ? ", unit[i]);
+					coin[i] = sc.nextInt();
+				}
+				coinEx.printBills(coinEx.exchange(coin));
+			} else {
+				break;
 			}
+
 		} while (ch < 1 || ch > 2);
 	}
 
@@ -116,12 +125,12 @@ public class BankService {
 			System.out.println("1. 생성 / 재발급");
 			System.out.println("2. 이전 화면으로");
 			ch = sc.nextInt();
-			
-			if(ch==1) {
-				//메서드 호출
+
+			if (ch == 1) {
+				// 메서드 호출
 				scard.makeOTP();
-			}else {
-				break;				
+			} else {
+				break;
 			}
 		} while (ch < 1 || ch > 2);
 	}
