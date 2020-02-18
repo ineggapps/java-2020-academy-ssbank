@@ -26,17 +26,30 @@ public class User {
 		}
 		return list[idx];
 	}
-	
-	public UserVO getList(String name, String bbNum) {
+
+	public UserVO getList(String bbNum) {
 		UserVO vo = null;
 		bbNum.replaceAll("-", "");
-		for(int i=0;i<list.length;i++) {
-			if (list[i].getName().equals(name) && list[i].getBankBook().getBbNum().equals(bbNum)) {
+		for (int i = 0; i < list.length; i++) {
+			if (list[i] != null && list[i].getBankBook().getBbNum().equals(bbNum)) {
 				vo = list[i];
 				break;
 			}
 		}
-		//검색 결과가 없으면 Null을 반환한다.
+		// 검색 결과가 없으면 Null을 반환한다.
+		return vo;
+	}
+
+	public UserVO getList(String name, String bbNum) {
+		UserVO vo = null;
+		bbNum.replaceAll("-", "");
+		for (int i = 0; i < list.length; i++) {
+			if (list[i] != null && list[i].getName().equals(name) && list[i].getBankBook().getBbNum().equals(bbNum)) {
+				vo = list[i];
+				break;
+			}
+		}
+		// 검색 결과가 없으면 Null을 반환한다.
 		return vo;
 	}
 

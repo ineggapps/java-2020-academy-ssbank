@@ -11,7 +11,7 @@ public class BankService {
 	// 5. SCard (보안카드)
 	SCard scard = new SCard(user);
 	// 1. BankManage (발급 조회)
-	BankManage bankManage = new BankManage(user,scard);
+	BankManage bankManage = new BankManage(user, scard);
 	// 2. BankIO (입출금)
 	BankIO bankIO = new BankIO(user);
 	// 3. BankEx (환전)
@@ -55,17 +55,15 @@ public class BankService {
 			System.out.println("3. 이전 화면");
 			System.out.print("선택 > ");
 			ch = sc.nextInt();
-
 			if (ch == 3) {
 				break;
 			}
-
 			switch (ch) {
 			case 1:
-				System.out.println("입금 완료");
+				bankIO.input();
 				break;
 			case 2:
-				System.out.println("출금 완료");
+				bankIO.output();
 				break;
 			}
 		} while (ch < 1 || ch > 3);
@@ -76,6 +74,7 @@ public class BankService {
 		double currency = 0;
 		int ch;
 		do {
+			System.out.println("환전 할 통화를 선택해주세요");
 			System.out.println("1. USD(미국 달러)");
 			System.out.println("2. JPY(일본 엔)");
 			System.out.println("3. CNY(중국 위안)");
