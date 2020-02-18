@@ -1,21 +1,23 @@
 package bank;
 
+import java.text.NumberFormat;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class BankService {
 	private Scanner sc = new Scanner(System.in);
 	private User user = new User();
 	// 생성자를 통한 의존관계 생성해야 함
+	// 5. SCard (보안카드)
+	SCard scard = new SCard(user);
 	// 1. BankManage (발급 조회)
-	BankManage bankManage = new BankManage(user);
+	BankManage bankManage = new BankManage(user,scard);
 	// 2. BankIO (입출금)
 	BankIO bankIO = new BankIO(user);
 	// 3. BankEx (환전)
-	BankEx bankEx = new BankEx(user);
+	BankEx bankEx = new BankEx();
 	// 4. CoinEx (동전교환)
 	CoinEx coinEx = new CoinEx(user);
-	// 5. SCard (보안카드)
-	SCard scard = new SCard(user);
 
 	// 계좌 발급 및 조회
 	public void bankManage() {
@@ -33,9 +35,11 @@ public class BankService {
 
 			switch (ch) {
 			case 1:
+				bankManage.issued();
 				System.out.println("발급되었습니다.");
 				break;
 			case 2:
+				bankManage.lookup();
 				System.out.println("조회 완료. 거래 초기 화면으로 돌아갑니다.");
 				break;
 			}
@@ -67,30 +71,42 @@ public class BankService {
 		} while (ch < 1 || ch > 3);
 	}
 
-	// 환전
 	public void exchangeCurrency() {
+		double krw;
+		double currency = 0;
 		int ch;
 		do {
-			System.out.println("1. 원화 => 달러");
-			System.out.println("2. 원화 => 엔");
-			System.out.println("3. 원화 => 위안");
+			System.out.println("1. USD(미국 달러)");
+			System.out.println("2. JPY(일본 엔)");
+			System.out.println("3. CNY(중국 위안)");
 			System.out.println("4. 이전 화면으로");
 			ch = sc.nextInt();
-
 			if (ch == 4) {
 				break;
 			}
-
+			System.out.println("환전할실 원화 금액을 입력해 주세요.");
+			krw = sc.nextInt();
+			NumberFormat kor = NumberFormat.getCurrencyInstance();
+			System.out.print("입력하신 금액" + kor.format(krw));
 			switch (ch) {
 			case 1:
+				currency = BankEx.exchangeDollar(krw);
+				NumberFormat us = NumberFormat.getCurrencyInstance(Locale.US);
+				System.out.print("은  USD(미국달러)로" + us.format(currency) + "입니다.");
 				break;
 			case 2:
+				currency = BankEx.exchangeYen(krw);
+				NumberFormat jap = NumberFormat.getCurrencyInstance(Locale.JAPAN);
+				System.out.print("은 JPY(일본 엔)로" + jap.format(currency) + "입니다.");
 				break;
 			case 3:
+				currency = BankEx.exchangeYuan(krw);
+				NumberFormat chi = NumberFormat.getCurrencyInstance(Locale.CHINA);
+				System.out.print("은  CNY(중국 위안)로" + chi.format(currency) + "입니다.\n");
 				break;
-
 			}
 		} while (ch < 1 || ch > 4);
+
 	}
 
 	// 화폐를동전으로 교환하기

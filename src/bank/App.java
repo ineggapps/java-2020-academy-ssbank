@@ -10,7 +10,7 @@ public class App {
 
 		while (true) {
 			do {
-				System.out.println("====== SS은행 ======");
+				System.out.println("\n====== SS은행 ======");
 				System.out.println("1. 계좌 발급/폐기");
 				System.out.println("2. 입금");
 				System.out.println("3. 출금");
